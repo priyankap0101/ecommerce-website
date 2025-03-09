@@ -5,10 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("cart-items")) {
         displayCart();
     }
+    if (document.getElementById("product-container")) {
+        loadProductDetails(); // ✅ Load product details for product.html
+    }
     updateCartCount();
 });
 
-// Load Products from JSON and Display on Home Page
+// ✅ Load Products from JSON and Display on Home Page
 function loadProducts() {
     fetch("products.json")
         .then(response => response.json())
@@ -19,9 +22,10 @@ function loadProducts() {
                 let productElement = document.createElement("div");
                 productElement.classList.add("product");
                 productElement.innerHTML = `
-                    <img src="${product.image}" width="100">
+                    <img src="${product.image}" width="150">
                     <h3>${product.name}</h3>
                     <p>Price: $${product.price.toFixed(2)}</p>
+                    <a href="product.html?id=${product.id}">View Details</a>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 `;
                 productList.appendChild(productElement);
@@ -30,21 +34,51 @@ function loadProducts() {
         .catch(error => console.error("Error loading products:", error));
 }
 
+// ✅ Load Product Details on product.html
+function loadProductDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get("id");
+
+    if (!productId) {
+        document.getElementById("product-container").innerHTML = "<p>Product not found.</p>";
+        return;
+    }
+
+    fetch("products.json")
+        .then(response => response.json())
+        .then(products => {
+            let product = products.find(p => p.id == productId);
+            if (product) {
+                document.getElementById("product-container").innerHTML = `
+                    <img src="${product.image}" width="200">
+                    <h2>${product.name}</h2>
+                    <p>Price: $${product.price.toFixed(2)}</p>
+                    <p>${product.description}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+            } else {
+                document.getElementById("product-container").innerHTML = "<p>Product not found.</p>";
+            }
+        })
+        .catch(error => console.error("Error loading product details:", error));
+}
+
+// ✅ Add to Cart
 function addToCart(productId) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart.includes(productId)) {
         alert("This item is already in your cart!");
-        return; // Stop execution if item is already in cart
+        return;
     }
 
-    cart.push(Number(productId)); // Ensure IDs are stored as numbers
+    cart.push(Number(productId));
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     alert("Item added to cart successfully!");
 }
 
-// Update Cart Count & Total Price
+// ✅ Update Cart Count & Total Price
 function updateCartCount() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalPrice = 0;
@@ -66,7 +100,7 @@ function updateCartCount() {
         .catch(error => console.error("Error loading products:", error));
 }
 
-// Display Cart Items on Cart Page
+// ✅ Display Cart Items on Cart Page
 function displayCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartItemsContainer = document.getElementById("cart-items");
@@ -100,13 +134,12 @@ function displayCart() {
                 }
             });
 
-            // ✅ Update the cart total on cart page
             cartTotalElement.innerText = totalPrice.toFixed(2);
         })
         .catch(error => console.error("Error loading products:", error));
 }
 
-// Remove Item from Cart
+// ✅ Remove Item from Cart
 function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let updatedCart = cart.filter(id => id !== productId);
@@ -115,7 +148,7 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
-// Checkout Function
+// ✅ Checkout Function
 function checkout() {
     alert("Order placed successfully!");
     localStorage.removeItem("cart");

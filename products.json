@@ -1,5 +1,72 @@
 [
-    { "id": 1, "name": "Product A", "price": 10.99, "image": "img1.jpg" },
-    { "id": 2, "name": "Product B", "price": 15.49, "image": "img2.jpg" },
-    { "id": 3, "name": "Product C", "price": 20.00, "image": "img3.jpg" }
+    {
+        "id": 1,
+        "name": "Wireless Headphones",
+        "price": 49.99,
+        "image": "headphones.jpg",
+        "description": "High-quality wireless headphones with noise cancellation, long battery life, and immersive sound experience."
+    },
+    {
+        "id": 2,
+        "name": "Smart Watch",
+        "price": 99.99,
+        "image": "watch.jpg",
+        "description": "A stylish smartwatch with fitness tracking, heart rate monitoring, and phone notifications."
+    },
+    {
+        "id": 3,
+        "name": "Gaming Mouse",
+        "price": 29.99,
+        "image": "mouse.jpg",
+        "description": "Ergonomic gaming mouse with customizable RGB lighting and high-precision sensor."
+    },
+    {
+        "id": 4,
+        "name": "Mechanical Keyboard",
+        "price": 79.99,
+        "image": "keyboard.jpg",
+        "description": "RGB backlit mechanical keyboard with tactile switches for enhanced gaming and typing experience."
+    },
+    {
+        "id": 5,
+        "name": "Wireless Earbuds",
+        "price": 59.99,
+        "image": "earbuds.jpg",
+        "description": "True wireless earbuds with deep bass, touch controls, and water resistance."
+    },
+    {
+        "id": 6,
+        "name": "Portable Bluetooth Speaker",
+        "price": 39.99,
+        "image": "speaker.jpg",
+        "description": "Compact Bluetooth speaker with powerful bass, long battery life, and waterproof design."
+    },
+    {
+        "id": 7,
+        "name": "Laptop Stand",
+        "price": 24.99,
+        "image": "laptop-stand.jpg",
+        "description": "Adjustable and foldable laptop stand for better ergonomics and cooling."
+    },
+    {
+        "id": 8,
+        "name": "Wireless Charger",
+        "price": 19.99,
+        "image": "wireless-charger.jpg",
+        "description": "Fast wireless charger compatible with all Qi-enabled devices."
+    },
+    {
+        "id": 9,
+        "name": "Smartphone Tripod",
+        "price": 34.99,
+        "image": "tripod.jpg",
+        "description": "Lightweight and adjustable smartphone tripod for stable video recording and photography."
+    },
+    {
+        "id": 10,
+        "name": "External Hard Drive",
+        "price": 89.99,
+        "image": "hard-drive.jpg",
+        "description": "1TB external hard drive with USB 3.0 for fast data transfer and secure storage."
+    }
 ]
