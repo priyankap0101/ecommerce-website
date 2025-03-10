@@ -52,8 +52,8 @@ function loadProductDetails() {
                 document.getElementById("product-container").innerHTML = `
                     <img src="${product.image}" width="200">
                     <h2>${product.name}</h2>
-                    <p>Price: $${product.price.toFixed(2)}</p>
-                    <p>${product.description}</p>
+                    <p class="price">Price: $${product.price.toFixed(2)}</p>
+                    <p class="description">${product.description}</p>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 `;
             } else {
@@ -126,7 +126,7 @@ function displayCart() {
                     itemElement.innerHTML = `
                         <img src="${product.image}" width="50">
                         <h4>${product.name}</h4>
-                        <p>Price: $${product.price.toFixed(2)}</p>
+                        <p >Price: $${product.price.toFixed(2)}</p>
                         <button onclick="removeFromCart(${product.id})">Remove</button>
                     `;
                     cartItemsContainer.appendChild(itemElement);
