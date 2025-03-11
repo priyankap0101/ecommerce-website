@@ -46,25 +46,48 @@ nav ul li a:hover {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(to right, #1c2639, #2d4b74);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    #f8f9fa,
+    #e9ecef
+  ); /* Light gradient for a modern touch */
+  color: #222; /* Darker text for better contrast */
   text-align: center;
-  padding: 70px 20px;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 50px 20px;
+  border-radius: 10px; /* Smooth rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .hero h2 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #333; /* Slightly darker for readability */
+  text-transform: uppercase; /* Modern touch */
 }
 
 .hero p {
-  font-size: 18px;
-  max-width: 600px;
-  margin: 10px auto;
-  opacity: 0.85;
+  font-size: 20px;
+  max-width: 700px;
+  margin: 15px auto;
+  opacity: 0.9;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero {
+    padding: 30px 15px;
+  }
+
+  .hero h2 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
 }
 
 /* Product List */
