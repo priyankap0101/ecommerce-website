@@ -25,46 +25,48 @@
       </nav>
     </header>
 
-    <!-- 🛒 Checkout Container -->
-    <div class="checkout-container">
-      <h2>Checkout</h2>
+   <!-- 🛒 Checkout Container -->
+   <div class="checkout-container">
+    <h2>Checkout</h2>
 
-      <!-- 📦 Order Summary -->
-      <div class="order-summary">
+    <!-- 📦 Order Summary -->
+    <div class="order-summary">
         <h3>Order Summary</h3>
-        <div id="order-summary"></div>
-        <!-- Populated by JS -->
-      </div>
+        <div id="order-summary"></div> <!-- Populated by JS -->
+    </div>
 
-      <!-- 📝 Checkout Form -->
-      <form id="checkout-form">
+    <!-- 📝 Checkout Form -->
+    <form id="checkout-form">
         <h3>Billing Details</h3>
 
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Enter your name" required />
+        <div class="billing-details">
+            <div class="input-group">
+                <input type="text" id="name" placeholder=" " required>
+                <label for="name">Full Name</label>
+            </div>
 
-        <label for="address">Shipping Address</label>
-        <textarea
-          id="address"
-          placeholder="Enter your address"
-          required
-        ></textarea>
+            <div class="input-group">
+                <textarea id="address" placeholder=" " required></textarea>
+                <label for="address">Shipping Address</label>
+            </div>
+        </div>
 
         <h3>Payment Method</h3>
-        <label>
-          <input type="radio" name="payment" value="credit-card" required />
-          Credit Card
-        </label>
-        <label>
-          <input type="radio" name="payment" value="paypal" /> PayPal
-        </label>
-        <label>
-          <input type="radio" name="payment" value="cod" /> Cash on Delivery
-        </label>
+        <div class="payment-method">
+            <label>
+                <input type="radio" name="payment" value="credit-card" required> Credit Card
+            </label>
+            <label>
+                <input type="radio" name="payment" value="paypal"> PayPal
+            </label>
+            <label>
+                <input type="radio" name="payment" value="cod"> Cash on Delivery
+            </label>
+        </div>
 
         <button type="submit" class="checkout-btn">Place Order</button>
-      </form>
-    </div>
+    </form>
+</div>
 
     <script src="checkout.js"></script>
     <!-- JS for Checkout -->
