@@ -1,41 +1,47 @@
 document.addEventListener("DOMContentLoaded", function () {
-    displayOrderSummary();
+  console.log("checkout.js is loaded!"); // ✅ Debug Log
 
-    document.getElementById("checkout-form").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form from refreshing the page
-        placeOrder();
-    });
+  displayOrderSummary();
+
+  let checkoutForm = document.getElementById("checkout-form");
+  if (!checkoutForm) {
+      console.error("❌ ERROR: Checkout form not found!");
+      return;
+  }
+
+  checkoutForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      console.log("Place Order button clicked!"); // ✅ Debug Log
+      placeOrder();
+  });
 });
 
-// ✅ Function to display cart items in order summary
 function displayOrderSummary() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let orderSummary = document.getElementById("order-summary");
-    let totalPrice = 0;
+  let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
+  console.log("Checkout Items Retrieved:", checkoutItems); // ✅ Debug Log
 
-    if (cart.length === 0) {
-        orderSummary.innerHTML = "<p>Your cart is empty.</p>";
-        return;
-    }
+  let orderSummaryContainer = document.getElementById("order-summary");
+  if (!orderSummaryContainer) {
+      console.error("❌ ERROR: Order summary container not found!");
+      return;
+  }
 
-    fetch("products.json")
-        .then(response => response.json())
-        .then(products => {
-            orderSummary.innerHTML = "";
-            cart.forEach(productId => {
-                let product = products.find(p => p.id == productId);
-                if (product) {
-                    orderSummary.innerHTML += `<p>${product.name} - $${product.price.toFixed(2)}</p>`;
-                    totalPrice += product.price;
-                }
-            });
+  let totalPrice = 0;
+  if (checkoutItems.length === 0) {
+      orderSummaryContainer.innerHTML = "<p>No items selected for checkout.</p>";
+      return;
+  }
 
-            orderSummary.innerHTML += `<hr><p><strong>Total: $${totalPrice.toFixed(2)}</strong></p>`;
-        })
-        .catch(error => console.error("Error loading products:", error));
+  let summaryHTML = "<h3>Order Summary</h3>";
+  checkoutItems.forEach((item) => {
+      summaryHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+      totalPrice += item.price;
+  });
+
+  summaryHTML += `<p><strong>Total: $${totalPrice.toFixed(2)}</strong></p>`;
+  orderSummaryContainer.innerHTML = summaryHTML;
 }
-
-// ✅ Function to place an order
+// ✅ Place Order
 function placeOrder() {
     let name = document.getElementById("name").value.trim();
     let address = document.getElementById("address").value.trim();
@@ -46,26 +52,25 @@ function placeOrder() {
         return;
     }
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
+    let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
+
+    // 🛠 Fix: Ensure the total amount is the sum of all selected items
+    let totalAmount = checkoutItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
 
     let orderNumber = "ORD-" + Math.floor(Math.random() * 1000000);
-    let totalAmount = document.querySelector("#order-summary").innerText.match(/\$([\d.]+)/);
-    totalAmount = totalAmount ? totalAmount[1] : "0.00";
 
-    // ✅ Save order details in localStorage
     localStorage.setItem("orderDetails", JSON.stringify({
         orderNumber: orderNumber,
         paymentMethod: paymentMethod.value,
-        totalAmount: totalAmount,
-        items: cart
+        totalAmount: totalAmount, // ✅ Now correctly storing the full total
+        items: checkoutItems
     }));
 
     alert("Order placed successfully! 🎉");
 
-    localStorage.removeItem("cart"); // Clear cart
-    window.location.href = "order-confirmation.html"; // Redirect to confirmation page
+    localStorage.removeItem("checkoutItems");
+
+    setTimeout(() => {
+        window.location.href = "order-confirmation.html";
+    }, 1000);
 }
