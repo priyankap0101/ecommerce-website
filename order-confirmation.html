@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>My eCommerce Store</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="confirmation-container">
+        <h2>Thank You for Your Order! 🎉</h2>
+        <p><strong>Order Number:</strong> <span id="order-number"></span></p>
+        <p><strong>Payment Method:</strong> <span id="payment-method"></span></p>
+        <p><strong>Total Amount:</strong> $<span id="order-total"></span></p>
+
+        <h3>Ordered Items</h3>
+        <div id="ordered-items"></div>
+        
+        <a href="index.html" class="back-home-btn">Continue Shopping</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+
+            if (!orderDetails) {
+                document.body.innerHTML = "<h2>No recent orders found.</h2>";
+                return;
+            }
+
+            document.getElementById("order-number").innerText = orderDetails.orderNumber;
+            document.getElementById("payment-method").innerText = orderDetails.paymentMethod;
+            document.getElementById("order-total").innerText = orderDetails.totalAmount;
+
+            let orderedItemsContainer = document.getElementById("ordered-items");
+            orderedItemsContainer.innerHTML = orderDetails.items.map(item => `<p>✅ Product ID: ${item}</p>`).join("");
+        });
+    </script>
+
+</body>
+</html>

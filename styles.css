@@ -535,6 +535,9 @@ footer {
   background: #f57c00;
   transform: translateY(-2px);
 }
+
+
+/* checkout.html */
 /* Checkout Page Container */
 .checkout-container {
   max-width: 850px;
@@ -699,4 +702,63 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+
+/* Order Confirmation Page */
+.confirmation-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.confirmation-container h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #27ae60;
+  margin-bottom: 15px;
+}
+
+.order-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.order-details p {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+#ordered-items {
+  text-align: left;
+  padding: 15px;
+  background: #fff3cd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.home-btn {
+  display: inline-block;
+  background: #ff9f00;
+  color: white;
+  font-size: 18px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.home-btn:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
 }

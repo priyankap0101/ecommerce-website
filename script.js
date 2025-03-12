@@ -6,10 +6,30 @@ document.addEventListener("DOMContentLoaded", function () {
     displayCart();
   }
   if (document.getElementById("product-container")) {
-    loadProductDetails(); // ✅ Load product details for product.html
+    loadProductDetails();
   }
+  if (document.getElementById("order-summary")) {
+    displayOrderSummary();
+  }
+  if (document.getElementById("checkout-form")) {
+    document
+      .getElementById("checkout-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        placeOrder();
+      });
+  }
+  if (document.getElementById("order-number")) {
+    loadOrderConfirmation();
+  }
+
   updateCartCount();
 });
+
+// ✅ Function to Redirect to Checkout Page
+function goToCheckout() {
+  window.location.href = "checkout.html"; // ✅ Redirects to the checkout page
+}
 
 // ✅ Load Products from JSON and Display on Home Page
 function loadProducts() {
@@ -17,25 +37,23 @@ function loadProducts() {
     .then((response) => response.json())
     .then((products) => {
       let productList = document.getElementById("product-list");
-
       products.forEach((product) => {
         let productElement = document.createElement("div");
         productElement.classList.add("product");
         productElement.innerHTML = `
-                    <img src="${product.image}" width="150">
-                    <h3>${product.name}</h3>
-                    <p>Price: $${product.price.toFixed(2)}</p>
-                    <a href="product.html?id=${product.id}">View Details</a>
-                    <button onclick="addToCart(${
-                      product.id
-                    })">Add to Cart</button>
-                `;
+                  <img src="${product.image}" width="150">
+                  <h3>${product.name}</h3>
+                  <p>Price: $${product.price.toFixed(2)}</p>
+                  <a href="product.html?id=${product.id}">View Details</a>
+                  <button onclick="addToCart(${product.id})">Add to Cart</button>
+              `;
         productList.appendChild(productElement);
       });
     })
     .catch((error) => console.error("Error loading products:", error));
 }
 
+// ✅ Load Product Details on product.html
 function loadProductDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -52,25 +70,19 @@ function loadProductDetails() {
       let product = products.find((p) => p.id == productId);
       if (product) {
         document.getElementById("product-container").innerHTML = `
-                <div class="product-container">
-                    <img class="product-image" src="${product.image}" alt="${
-          product.name
-        }">
-                    <div class="product-info">
-                        <h2 class="product-name">${product.name}</h2>
-                        <p class="price">$${product.price.toFixed(2)} 
-                            <span class="original-price">$${(
-                              product.price * 1.2
-                            ).toFixed(2)}</span> 
-                            <span class="discount">20% OFF</span>
-                        </p>
-                        <p class="description">${product.description}</p>
-                        <button class="add-to-cart-btn" onclick="addToCart(${
-                          product.id
-                        })">Add to Cart</button>
-                    </div>
-                </div>
-            `;
+                  <div class="product-container">
+                      <img class="product-image" src="${product.image}" alt="${product.name}">
+                      <div class="product-info">
+                          <h2 class="product-name">${product.name}</h2>
+                          <p class="price">$${product.price.toFixed(2)} 
+                              <span class="original-price">$${(product.price * 1.2).toFixed(2)}</span> 
+                              <span class="discount">20% OFF</span>
+                          </p>
+                          <p class="description">${product.description}</p>
+                          <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                      </div>
+                  </div>
+              `;
       } else {
         document.getElementById("product-container").innerHTML =
           "<p>Product not found.</p>";
@@ -83,44 +95,27 @@ function loadProductDetails() {
 function addToCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  if (cart.includes(productId)) {
+  if (!cart.includes(productId)) {
+    cart.push(productId);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert("Item added to cart successfully!");
+  } else {
     alert("This item is already in your cart!");
-    return;
   }
-
-  cart.push(Number(productId));
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  alert("Item added to cart successfully!");
 }
 
-// ✅ Update Cart Count & Total Price
+// ✅ Update Cart Count
 function updateCartCount() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let totalPrice = 0;
   document.getElementById("cart-count").innerText = cart.length;
-
-  fetch("products.json")
-    .then((response) => response.json())
-    .then((products) => {
-      totalPrice = cart.reduce((sum, productId) => {
-        let product = products.find((p) => p.id === Number(productId));
-        return product ? sum + product.price : sum;
-      }, 0);
-
-      let totalElement = document.getElementById("cart-total-price");
-      if (totalElement) {
-        totalElement.innerText = totalPrice.toFixed(2);
-      }
-    })
-    .catch((error) => console.error("Error loading products:", error));
 }
 
-// ✅ Display Cart Items on Cart Page
+// ✅ Display Cart Items on cart.html
 function displayCart() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let cartItemsContainer = document.getElementById("cart-items");
-  let cartTotalElement = document.getElementById("cart-total");
+  let cartTotalElement = document.querySelector(".total-price");
   let totalPrice = 0;
 
   if (cart.length === 0) {
@@ -133,20 +128,17 @@ function displayCart() {
     .then((response) => response.json())
     .then((products) => {
       cartItemsContainer.innerHTML = "";
-
       cart.forEach((productId) => {
         let product = products.find((p) => p.id === Number(productId));
         if (product) {
           let itemElement = document.createElement("div");
           itemElement.classList.add("cart-item");
           itemElement.innerHTML = `
-                        <img src="${product.image}" width="50">
-                        <h4>${product.name}</h4>
-                        <p >Price: $${product.price.toFixed(2)}</p>
-                        <button onclick="removeFromCart(${
-                          product.id
-                        })">Remove</button>
-                    `;
+                      <img src="${product.image}" width="50">
+                      <h4>${product.name}</h4>
+                      <p>Price: $${product.price.toFixed(2)}</p>
+                      <button onclick="removeFromCart(${product.id})">Remove</button>
+                  `;
           cartItemsContainer.appendChild(itemElement);
           totalPrice += product.price;
         }
@@ -160,75 +152,38 @@ function displayCart() {
 // ✅ Remove Item from Cart
 function removeFromCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let updatedCart = cart.filter((id) => id !== productId);
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  cart = cart.filter((id) => id !== productId);
+  localStorage.setItem("cart", JSON.stringify(cart));
   displayCart();
   updateCartCount();
 }
 
-// ✅ Checkout Function
-function checkout() {
-  // alert("Order placed successfully!");
-  localStorage.removeItem("cart");
-  window.location.href = "checkout.html";
-}
+// ✅ Load Order Confirmation Page
+function loadOrderConfirmation() {
+  let orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
 
-
-
-
-
-// checkout
-
-document.addEventListener("DOMContentLoaded", function () {
-  displayOrderSummary(); // ✅ Load order summary when page loads
-
-  document.getElementById("checkout-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent page reload
-      placeOrder(); // ✅ Handle order placement
-  });
-});
-
-// ✅ Load Cart Items & Display Order Summary
-function displayOrderSummary() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let orderSummaryContainer = document.getElementById("order-summary");
-  let totalPrice = 0;
-
-  if (cart.length === 0) {
-      orderSummaryContainer.innerHTML = "<p>Your cart is empty.</p>";
-      return;
+  if (!orderDetails) {
+    document.body.innerHTML =
+      "<h2 style='text-align:center;'>No recent orders found.</h2>";
+    return;
   }
+
+  document.getElementById("order-number").innerText = orderDetails.orderNumber;
+  document.getElementById("payment-method").innerText = orderDetails.paymentMethod;
+  document.getElementById("order-total").innerText = orderDetails.totalAmount;
 
   fetch("products.json")
-      .then(response => response.json())
-      .then(products => {
-          let summaryHTML = "<h3>Order Summary</h3>";
-          cart.forEach(productId => {
-              let product = products.find(p => p.id === Number(productId));
-              if (product) {
-                  totalPrice += product.price;
-                  summaryHTML += `<p>${product.name} - $${product.price.toFixed(2)}</p>`;
-              }
-          });
+    .then((response) => response.json())
+    .then((products) => {
+      let orderedItemsContainer = document.getElementById("ordered-items");
+      orderedItemsContainer.innerHTML = "";
 
-          summaryHTML += `<hr><p><strong>Total: $${totalPrice.toFixed(2)}</strong></p>`;
-          orderSummaryContainer.innerHTML = summaryHTML;
-      })
-      .catch(error => console.error("Error loading products:", error));
-}
-
-// ✅ Handle Order Placement
-function placeOrder() {
-  let name = document.getElementById("name").value.trim();
-  let address = document.getElementById("address").value.trim();
-  let paymentMethod = document.querySelector('input[name="payment"]:checked');
-
-  if (!name || !address || !paymentMethod) {
-      alert("Please fill in all details and select a payment method.");
-      return;
-  }
-
-  alert("Order placed successfully! 🎉");
-  localStorage.removeItem("cart"); // ✅ Clear cart after checkout
-  window.location.href = "index.html"; // ✅ Redirect to homepage
+      orderDetails.items.forEach((productId) => {
+        let product = products.find((p) => p.id === Number(productId));
+        if (product) {
+          orderedItemsContainer.innerHTML += `<p>✅ ${product.name} - $${product.price.toFixed(2)}</p>`;
+        }
+      });
+    })
+    .catch((error) => console.error("Error loading products:", error));
 }
