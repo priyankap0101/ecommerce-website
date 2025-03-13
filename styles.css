@@ -183,7 +183,7 @@ nav ul li a:hover {
 }
 
 /* 🛒 Cart Section - Modern Glassmorphism Design */
-.cart {
+.cart-container {
   max-width: 950px;
   margin: 50px auto;
   background: rgba(255, 255, 255, 0.8);
@@ -195,7 +195,7 @@ nav ul li a:hover {
 }
 
 /* 🏷️ Cart Title */
-.cart h2 {
+.cart-container h2 {
   text-align: center;
   font-size: 30px;
   font-weight: 700;
@@ -207,7 +207,7 @@ nav ul li a:hover {
 }
 
 /* 📏 Underline Effect */
-.cart h2::after {
+.cart-container h2::after {
   content: '';
   width: 80px;
   height: 4px;
@@ -220,6 +220,13 @@ nav ul li a:hover {
 }
 
 /* 🛍️ Cart Items */
+#cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 📦 Individual Cart Item */
 .cart-item {
   display: flex;
   align-items: center;
@@ -268,6 +275,14 @@ nav ul li a:hover {
 .cart-item p {
   font-size: 16px;
   color: #777;
+}
+
+/* ✅ Checkbox for Selecting Items */
+.cart-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #f39c12;
+  cursor: pointer;
 }
 
 /* ❌ Remove Button */
@@ -333,14 +348,15 @@ nav ul li a:hover {
 }
 
 /* 🛒 Cart Total Amount */
-.cart-total {
+.total-price {
   font-size: 22px;
   font-weight: 700;
   color: #2c3e50;
 }
 
 /* 💳 Checkout Button */
-.cart .checkout-btn {
+.checkout-btn, 
+#checkout-selected {
   display: block;
   width: 100%;
   background: linear-gradient(135deg, #f39c12, #e67e22);
@@ -353,10 +369,12 @@ nav ul li a:hover {
   text-align: center;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 6px 18px rgba(243, 156, 18, 0.3);
+  cursor: pointer;
 }
 
 /* 💡 Checkout Button Hover */
-.cart .checkout-btn:hover {
+.checkout-btn:hover, 
+#checkout-selected:hover {
   background: linear-gradient(135deg, #e67e22, #d35400);
   transform: scale(1.03);
   box-shadow: 0 8px 22px rgba(243, 156, 18, 0.4);
@@ -364,7 +382,7 @@ nav ul li a:hover {
 
 /* 🎯 Responsive Adjustments */
 @media (max-width: 768px) {
-  .cart {
+  .cart-container {
     width: 95%;
     padding: 30px;
   }
@@ -400,27 +418,17 @@ nav ul li a:hover {
     padding: 15px;
   }
 
-  .cart-summary .total {
+  .total-price {
     font-size: 20px;
   }
 
-  .cart .checkout-btn {
+  .checkout-btn, 
+  #checkout-selected {
     font-size: 18px;
     padding: 16px;
   }
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 25px;
-  background: #1a1f36;
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
-  margin-top: 40px;
-  border-radius: 10px 10px 0 0;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
