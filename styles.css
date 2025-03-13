@@ -611,32 +611,70 @@ nav ul li a:hover {
   box-shadow: 0 0 10px rgba(255, 106, 0, 0.2);
 }
 
-/* 💳 Payment Method */
+/* 💳 Payment Method - Clean & Modern */
 .payment-method {
   display: flex;
-  gap: 14px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
 }
 
+/* 🏷️ Payment Option */
 .payment-method label {
-  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
   border-radius: 8px;
-  border: 1.5px solid #ddd;
+  border: 2px solid #ddd;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  transition: 0.3s;
+  background: #fff;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  min-width: 140px;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+/* 🛠 Hide Radio Button */
 .payment-method input[type="radio"] {
   display: none;
 }
 
+/* 🎨 Selected Payment Option */
 .payment-method input:checked + label {
   border-color: #ff6a00;
-  background: rgba(255, 106, 0, 0.1);
+  background: #ff6a00;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(255, 106, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 🖱️ Hover Effect */
+.payment-method label:hover {
+  border-color: #ff6a00;
+  background: rgba(255, 106, 0, 0.08);
   color: #ff6a00;
 }
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .payment-method {
+    gap: 10px;
+  }
+  .payment-method label {
+    font-size: 14px;
+    padding: 10px 16px;
+    min-width: 120px;
+  }
+}
+
 
 /* 🚀 Checkout Button */
 .checkout-btn {
