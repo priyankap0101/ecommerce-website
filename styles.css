@@ -182,48 +182,30 @@ nav ul li a:hover {
   background: #219150;
 }
 
-/* 🛒 Cart Section - Modern Glassmorphism Design */
+/* 🛒 Cart Container */
 .cart-container {
-  max-width: 950px;
-  margin: 50px auto;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* 🏷️ Cart Title */
 .cart-container h2 {
   text-align: center;
-  font-size: 30px;
-  font-weight: 700;
-  color: #2c3e50;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 30px;
-  position: relative;
-}
-
-/* 📏 Underline Effect */
-.cart-container h2::after {
-  content: '';
-  width: 80px;
-  height: 4px;
-  background: #f39c12;
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  transform: translateX(-50%);
-  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 /* 🛍️ Cart Items */
 #cart-items {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 /* 📦 Individual Cart Item */
@@ -231,58 +213,39 @@ nav ul li a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 12px;
   border-bottom: 1px solid #ddd;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.6);
-  transition: background 0.3s, transform 0.3s ease;
-}
-
-/* ✨ Smooth Hover Effect */
-.cart-item:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: scale(1.02);
 }
 
 /* 📸 Product Image */
 .cart-item img {
-  width: 85px;
-  height: 85px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-right: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-/* 🖼️ Image Hover Effect */
-.cart-item img:hover {
-  transform: scale(1.08);
+  border-radius: 6px;
 }
 
 /* 📝 Item Details */
 .cart-item-details {
   flex-grow: 1;
+  margin-left: 12px;
 }
 
 .cart-item h4 {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
   color: #333;
-  margin-bottom: 5px;
 }
 
 .cart-item p {
-  font-size: 16px;
-  color: #777;
+  font-size: 14px;
+  color: #666;
 }
 
-/* ✅ Checkbox for Selecting Items */
+/* ✅ Checkbox */
 .cart-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   accent-color: #f39c12;
-  cursor: pointer;
 }
 
 /* ❌ Remove Button */
@@ -290,142 +253,101 @@ nav ul li a:hover {
   background: #e74c3c;
   color: white;
   border: none;
-  padding: 8px 14px;
-  cursor: pointer;
+  padding: 5px 10px;
   font-size: 14px;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* 🔥 Remove Button Hover */
 .cart-item button:hover {
   background: #c0392b;
-  transform: scale(1.05);
 }
 
-/* 🛍️ Quantity Selector */
+/* ➕➖ Quantity Selector */
 .cart-item .quantity {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 600;
+  gap: 5px;
+  font-size: 16px;
 }
 
-/* ➕➖ Quantity Buttons */
 .cart-item .quantity button {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: #3498db;
   color: white;
   border: none;
-  padding: 8px 12px;
-  font-size: 18px;
+  padding: 5px 8px;
+  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
 }
 
-/* ➕➖ Quantity Button Hover */
 .cart-item .quantity button:hover {
-  background: linear-gradient(135deg, #2980b9, #1e578f);
-  transform: scale(1.1);
+  background: #2980b9;
 }
 
-/* 📦 Sticky Cart Total Summary */
+/* 📦 Cart Summary */
 .cart-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 25px;
-  padding: 20px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  font-size: 18px;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
   font-weight: 600;
 }
 
-/* 🛒 Cart Total Amount */
+/* 🛒 Cart Total */
 .total-price {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #333;
 }
 
-/* 💳 Checkout Button */
-.checkout-btn, 
-#checkout-selected {
+/* 🌟 Checkout Button */
+.checkout-btn {
   display: block;
   width: 100%;
-  background: linear-gradient(135deg, #f39c12, #e67e22);
+  background: #ff9800;
   color: white;
   border: none;
-  padding: 18px;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
   text-align: center;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 6px 18px rgba(243, 156, 18, 0.3);
   cursor: pointer;
 }
 
-/* 💡 Checkout Button Hover */
-.checkout-btn:hover, 
-#checkout-selected:hover {
-  background: linear-gradient(135deg, #e67e22, #d35400);
-  transform: scale(1.03);
-  box-shadow: 0 8px 22px rgba(243, 156, 18, 0.4);
+.checkout-btn:hover {
+  background: #e67e22;
 }
 
 /* 🎯 Responsive Adjustments */
 @media (max-width: 768px) {
   .cart-container {
     width: 95%;
-    padding: 30px;
+    padding: 20px;
   }
 
   .cart-item {
     flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding: 15px;
+    padding: 10px;
   }
 
   .cart-item img {
-    margin-bottom: 10px;
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
   }
 
   .cart-item h4 {
-    font-size: 18px;
-  }
-
-  .cart-item p {
     font-size: 15px;
   }
 
-  .cart-item .quantity {
-    margin-top: 10px;
-  }
-
-  .cart-summary {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
-  }
-
-  .total-price {
-    font-size: 20px;
-  }
-
-  .checkout-btn, 
-  #checkout-selected {
-    font-size: 18px;
-    padding: 16px;
+  .checkout-btn {
+    font-size: 15px;
+    padding: 10px;
   }
 }
 
