@@ -1,46 +1,51 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("checkout.js is loaded!"); // ✅ Debug Log
+    console.log("✅ Checkout Page Loaded");
 
-  displayOrderSummary();
+    displayOrderSummary();
 
-  let checkoutForm = document.getElementById("checkout-form");
-  if (!checkoutForm) {
-      console.error("❌ ERROR: Checkout form not found!");
-      return;
-  }
+    let checkoutForm = document.getElementById("checkout-form");
+    if (!checkoutForm) {
+        console.error("❌ ERROR: Checkout form not found!");
+        return;
+    }
 
-  checkoutForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      console.log("Place Order button clicked!"); // ✅ Debug Log
-      placeOrder();
-  });
+    checkoutForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        console.log("🛒 Placing Order...");
+        placeOrder();
+    });
 });
 
+// ✅ Display Order Summary (for "Buy Now" & Cart)
 function displayOrderSummary() {
-  let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
-  console.log("Checkout Items Retrieved:", checkoutItems); // ✅ Debug Log
+    let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
+    console.log("📦 Checkout Items:", checkoutItems);
 
-  let orderSummaryContainer = document.getElementById("order-summary");
-  if (!orderSummaryContainer) {
-      console.error("❌ ERROR: Order summary container not found!");
-      return;
-  }
+    let orderSummaryContainer = document.getElementById("order-summary");
+    let totalPriceElement = document.getElementById("total-price");
 
-  let totalPrice = 0;
-  if (checkoutItems.length === 0) {
-      orderSummaryContainer.innerHTML = "<p>No items selected for checkout.</p>";
-      return;
-  }
+    if (!orderSummaryContainer || !totalPriceElement) {
+        console.error("❌ ERROR: Order summary container not found!");
+        return;
+    }
 
-  let summaryHTML = "<h3>Order Summary</h3>";
-  checkoutItems.forEach((item) => {
-      summaryHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
-      totalPrice += item.price;
-  });
+    let totalPrice = 0;
+    if (checkoutItems.length === 0) {
+        orderSummaryContainer.innerHTML = "<p>No items selected for checkout.</p>";
+        totalPriceElement.innerText = "0.00";
+        return;
+    }
 
-  summaryHTML += `<p><strong>Total: $${totalPrice.toFixed(2)}</strong></p>`;
-  orderSummaryContainer.innerHTML = summaryHTML;
+    let summaryHTML = "";
+    checkoutItems.forEach((item) => {
+        summaryHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+        totalPrice += item.price;
+    });
+
+    orderSummaryContainer.innerHTML = summaryHTML;
+    totalPriceElement.innerText = totalPrice.toFixed(2);
 }
+
 // ✅ Place Order
 function placeOrder() {
     let name = document.getElementById("name").value.trim();
@@ -48,13 +53,11 @@ function placeOrder() {
     let paymentMethod = document.querySelector('input[name="payment"]:checked');
 
     if (!name || !address || !paymentMethod) {
-        alert("Please fill in all required fields.");
+        alert("⚠️ Please fill in all required fields.");
         return;
     }
 
     let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
-
-    // 🛠 Fix: Ensure the total amount is the sum of all selected items
     let totalAmount = checkoutItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
 
     let orderNumber = "ORD-" + Math.floor(Math.random() * 1000000);
@@ -62,11 +65,11 @@ function placeOrder() {
     localStorage.setItem("orderDetails", JSON.stringify({
         orderNumber: orderNumber,
         paymentMethod: paymentMethod.value,
-        totalAmount: totalAmount, // ✅ Now correctly storing the full total
+        totalAmount: totalAmount,
         items: checkoutItems
     }));
 
-    alert("Order placed successfully! 🎉");
+    alert("🎉 Order placed successfully!");
 
     localStorage.removeItem("checkoutItems");
 

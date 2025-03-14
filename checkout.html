@@ -25,8 +25,9 @@
 
         <!-- Order Summary -->
         <div class="order-summary">
-           
+            <h3>Order Summary</h3>
             <div id="order-summary"></div>
+            <p><strong>Total: $<span id="total-price">0.00</span></strong></p>
         </div>
 
         <!-- Checkout Form -->
@@ -34,33 +35,27 @@
             <h3>Billing Details</h3>
             <div class="billing-details">
                 <div class="input-group">
-                    <input type="text" id="name" placeholder=" " required>
+                    <input type="text" id="name" required>
                     <label for="name">Full Name</label>
                 </div>
 
                 <div class="input-group">
-                    <textarea id="address" placeholder=" " required></textarea>
+                    <textarea id="address" required></textarea>
                     <label for="address">Shipping Address</label>
                 </div>
             </div>
 
             <h3>Payment Method</h3>
             <div class="payment-method">
-                <label>
-                    <input type="radio" name="payment" value="Credit Card"> Credit Card
-                </label>
-                <label>
-                    <input type="radio" name="payment" value="PayPal"> PayPal
-                </label>
-                <label>
-                    <input type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery
-                </label>
+                <label><input type="radio" name="payment" value="Credit Card"> Credit Card</label>
+                <label><input type="radio" name="payment" value="PayPal"> PayPal</label>
+                <label><input type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery</label>
             </div>
 
             <button type="submit" class="checkout-btn">Place Order</button>
         </form>
     </div>
 
-    <script src="./checkout.js"></script>
+    <script src="checkout.js"></script>
 </body>
 </html>
