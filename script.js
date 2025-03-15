@@ -67,34 +67,6 @@ function loadProductDetails() {
         .catch(error => console.error("Error loading product details:", error));
 }
 
-// ✅ Add to Cart
-function addToCart(productId) {
-    fetch("products.json")
-        .then(response => response.json())
-        .then(products => {
-            let product = products.find(p => p.id === Number(productId));
-            if (!product) return;
-
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-            let existingItem = cart.find(item => item.id === productId);
-            if (!existingItem) {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: product.image,
-                    quantity: 1
-                });
-                localStorage.setItem("cart", JSON.stringify(cart));
-                updateCartCount();
-                alert("Product added to cart! 🛒");
-            } else {
-                alert("This product is already in your cart.");
-            }
-        })
-        .catch(error => console.error("Error adding to cart:", error));
-}
 
 // ✅ Buy Now - Skips Cart and Goes to Checkout
 function buyNow(productId) {
@@ -122,46 +94,33 @@ function updateCartCount() {
     }
 }
 
-// ✅ Display Cart Items
-function displayCart() {
+function removeFromCart(id) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartItemsContainer = document.getElementById("cart-items");
-    let cartTotalElement = document.getElementById("cart-total");
-
-    cartItemsContainer.innerHTML = "";
-
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
-        cartTotalElement.innerText = "0.00";
-        return;
-    }
-
-    let total = 0;
-    cart.forEach(product => {
-        let item = document.createElement("div");
-        item.classList.add("cart-item");
-        item.innerHTML = `
-            <img src="${product.image}" width="50">
-            <p>${product.name}</p>
-            <p>Price: $${product.price.toFixed(2)}</p>
-            <button onclick="removeFromCart(${product.id})">Remove</button>
-        `;
-        cartItemsContainer.appendChild(item);
-
-        total += product.price;
-    });
-
-    cartTotalElement.innerText = total.toFixed(2);
-}
-
-// ✅ Remove Item from Cart (Fix)
-function removeFromCart(productId) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let index = cart.findIndex(item => item.id === productId);
-    if (index !== -1) {
-        cart.splice(index, 1);
-    }
+    cart = cart.filter((product) => product.id !== id);
     localStorage.setItem("cart", JSON.stringify(cart));
     displayCart();
-    updateCartCount();
-}
+  }
+
+  document
+    .getElementById("clear-cart")
+    .addEventListener("click", function () {
+      localStorage.removeItem("cart");
+      displayCart();
+    });
+
+  document
+    .getElementById("checkout")
+    .addEventListener("click", function () {
+      alert("Proceeding to checkout...");
+    });
+
+
+
+document.getElementById("clear-cart").addEventListener("click", function () {
+    localStorage.removeItem("cart");
+    displayCart();
+});
+
+document.getElementById("checkout").addEventListener("click", function () {
+    alert("Proceeding to checkout...");
+});
