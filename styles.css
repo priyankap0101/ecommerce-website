@@ -731,54 +731,123 @@ nav ul li a:hover {
   max-width: 600px;
   margin: 50px auto;
   padding: 30px;
-  background: white;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
+/* Confirmation Checkmark */
+.confirmation-icon {
+  font-size: 60px;
+  color: #2ecc71;
+  animation: popScale 0.5s ease-in-out;
+  margin-bottom: 10px;
+}
+
+/* Title */
 .confirmation-container h2 {
   font-size: 28px;
   font-weight: 700;
-  color: #27ae60;
+  color: #2ecc71;
   margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Order Details Box */
 .order-details {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
   margin-bottom: 20px;
   text-align: left;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #2ecc71;
 }
 
 .order-details p {
   font-size: 18px;
-  margin: 8px 0;
+  color: #444;
+  margin: 12px 0;
 }
 
+/* Ordered Items */
 #ordered-items {
   text-align: left;
-  padding: 15px;
-  background: #fff3cd;
-  border-radius: 8px;
+  padding: 18px;
+  background: #fff8e1;
+  border-radius: 10px;
   margin-bottom: 20px;
+  border-left: 5px solid #ff9800;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+#ordered-items ul {
+  padding-left: 20px;
+}
+
+#ordered-items li {
+  font-size: 16px;
+  color: #555;
+  margin: 6px 0;
+  list-style: none;
+  padding-left: 18px;
+  position: relative;
+}
+
+#ordered-items li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #2ecc71;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Home Button */
 .home-btn {
   display: inline-block;
-  background: #ff9f00;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
   color: white;
   font-size: 18px;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 14px 26px;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3);
 }
 
 .home-btn:hover {
-  background: #f57c00;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff5722, #ff9800);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(255, 87, 34, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popScale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

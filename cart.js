@@ -1,6 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
     displayCart();
 });
+window.addToCart = function(productId) {
+    fetch("products.json")
+        .then(response => response.json())
+        .then(products => {
+            let product = products.find(p => p.id === Number(productId));
+            if (!product) {
+                alert("Product not found!");
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            updateCartCount();
+            alert("Product added to cart!");
+        })
+        .catch(error => console.error("Error adding product to cart:", error));
+};
 
 // ✅ Display Cart Items
 function displayCart() {
