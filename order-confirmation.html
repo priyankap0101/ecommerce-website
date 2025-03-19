@@ -41,7 +41,7 @@
     document.getElementById("order-number").innerText = orderDetails.orderNumber;
     document.getElementById("payment-method").innerText = orderDetails.paymentMethod;
     
-    // 🛠 Fix: Ensure totalAmount is displayed as a valid number
+ 
     document.getElementById("order-total").innerText = parseFloat(orderDetails.totalAmount).toFixed(2);
 
     let orderedItemsContainer = document.getElementById("ordered-items");

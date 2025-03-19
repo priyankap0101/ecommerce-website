@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// ✅ Display Order Summary (for "Buy Now" & Cart)
 function displayOrderSummary() {
     let checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
     console.log("📦 Checkout Items:", checkoutItems);
@@ -46,7 +45,6 @@ function displayOrderSummary() {
     totalPriceElement.innerText = totalPrice.toFixed(2);
 }
 
-// ✅ Place Order
 function placeOrder() {
     let name = document.getElementById("name").value.trim();
     let address = document.getElementById("address").value.trim();

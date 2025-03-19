@@ -2,16 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("product-list")) {
         loadProducts();
     }
-    updateCartCount(); // Update cart count on page load
+    updateCartCount(); 
 });
 
-// ✅ Load Products from `products.json`
+
 function loadProducts() {
     fetch("products.json")
         .then(response => response.json())
         .then(products => {
             let productList = document.getElementById("product-list");
-            productList.innerHTML = ""; // Clear previous content
+            productList.innerHTML = "";
 
             products.forEach(product => {
                 let productElement = document.createElement("div");
@@ -29,7 +29,7 @@ function loadProducts() {
         .catch(error => console.error("Error loading products:", error));
 }
 
-// ✅ Buy Now - Skips Cart and Goes to Checkout
+
 function buyNow(productId) {
     fetch("products.json")
         .then(response => response.json())
