@@ -799,36 +799,54 @@ nav ul li a:hover {
 /* Ordered Items */
 #ordered-items {
   text-align: left;
-  padding: 22px;
-  background: #fff3cd;
-  border-radius: 14px;
-  margin-bottom: 28px;
+  padding: 24px;
+  background: linear-gradient(135deg, #fff6db, #ffecb3);
+  border-radius: 16px;
+  margin-bottom: 30px;
   border-left: 6px solid #ff9800;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease-in-out;
+}
+
+#ordered-items:hover {
+  box-shadow: inset 0 5px 12px rgba(0, 0, 0, 0.1), 0 6px 14px rgba(0, 0, 0, 0.08);
+  transform: scale(1.02);
 }
 
 #ordered-items ul {
-  padding-left: 24px;
+  padding-left: 26px;
 }
 
 #ordered-items li {
   font-size: 18px;
   color: #444;
-  margin: 10px 0;
+  margin: 12px 0;
   list-style: none;
-  padding-left: 24px;
+  padding-left: 28px;
   position: relative;
-  font-weight: 500;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s ease-in-out;
 }
 
 #ordered-items li::before {
   content: "✔";
-  position: absolute;
-  left: 0;
   color: #2ecc71;
   font-weight: bold;
   font-size: 22px;
+  transition: transform 0.3s ease-in-out;
 }
+
+#ordered-items li:hover {
+  transform: translateX(5px);
+}
+
+#ordered-items li:hover::before {
+  transform: scale(1.2);
+}
+
 
 /* Home Button */
 .home-btn {
