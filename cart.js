@@ -21,7 +21,7 @@ window.addToCart = function(productId) {
         .catch(error => console.error("Error adding product to cart:", error));
 };
 
-// ✅ Display Cart Items
+
 function displayCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartContainer = document.getElementById("cart-items");
